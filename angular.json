@@ -2,5 +2,49 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "bowling-score": {
+      "projectType": "library",
+      "root": "projects/bowling-score",
+      "sourceRoot": "projects/bowling-score/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/bowling-score/tsconfig.lib.json",
+            "project": "projects/bowling-score/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/bowling-score/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/bowling-score/src/test.ts",
+            "tsConfig": "projects/bowling-score/tsconfig.spec.json",
+            "karmaConfig": "projects/bowling-score/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/bowling-score/tsconfig.lib.json",
+              "projects/bowling-score/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": "7b4b66d6-fb5c-497f-af40-2f7aa0c2d36b"
+  },
+  "defaultProject": "bowling-score"
 }
